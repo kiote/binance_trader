@@ -1,3 +1,3 @@
 ## compile
 
-ghc --make trade.hs
+`ghc --make trade.hs`
