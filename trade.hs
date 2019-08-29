@@ -1,3 +1,8 @@
+import Network.HTTP
+
+getUrl :: String -> IO String
+getUrl url = simpleHTTP (getRequest url) >>= getResponseBody
+
 tradingPrice :: Fractional p => [Char] -> [Char] -> p
 tradingPrice from to 
     | from == "BTC" && to == "USDT" = 10200
@@ -5,5 +10,8 @@ tradingPrice from to
 
 main = do
     putStrLn "Asset curency: "
-    currentCurrency <- getLine
-    putStrLn("Your current currency is " ++ currentCurrency)
+    dataFromFile <- getContents
+    putStrLn("Your file lines are ")
+    mapM_ print $ lines dataFromFile
+    apiResult <- getUrl "https://api.binance.com/api/v3/avgPrice?symbol=BTCUSDT"
+    putStrLn apiResult
