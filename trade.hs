@@ -1,5 +1,5 @@
 import Network.HTTP.Conduit
-import qualified Data.ByteString.Lazy as LB
+import qualified Data.ByteString.Lazy.Char8 as LB
 
 tradingPrice :: Fractional p => [Char] -> [Char] -> p
 tradingPrice from to 
@@ -11,4 +11,6 @@ main = do
     dataFromFile <- getContents
     putStrLn("Your file lines are ")
     mapM_ print $ lines dataFromFile
-    simpleHttp "https://api.binance.com/api/v3/avgPrice?symbol=BTCUSDT" >>= LB.putStr
+    result <- simpleHttp "https://api.binance.com/api/v3/avgPrice?symbol=BTCUSDT"
+    let string = LB.unpack result
+    putStr string
