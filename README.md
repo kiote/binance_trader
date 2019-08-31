@@ -1,3 +1,9 @@
+## install
+
+```
+cabal install http-conduit
+```
+
 ## compile
 
 `ghc --make trade.hs`
